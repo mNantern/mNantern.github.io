@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "QTodoTxt v1.2.0 released !"
+date:   2014-02-01 22:00:00
+categories: en
+excerpt: Two weeks ago I released v1.2.0 of QTodoTxt a cross-platform UI client for todo.txt files with a lot of new features !
+---
+![QTodoTxt_logo]({{site.url}}/assets/QTT256.png)
+
+
+QTodoTxt is my side project for one year now and I must say it grows quite well ! It provides a cross-platform UI client for todo.txt files (see [todo.txt](http://todotxt.com/) for more).
+
+I released v1.2.0 two weeks ago and for the first time people contributed code to that release. So thank you to chaghi, mgushee and CalumJEadie.
+
+They are a lot of new features in that version:
+   
+   * Support of [future Tasks](https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#wiki-futuretasks)
+   * A new field to filter tasks with direct text input
+   * Autosort of contexts and projects subtrees
+   * A new Mac Os X package but [it seems](https://github.com/mNantern/QTodoTxt/issues/36) that this package works only on one computer in the world, mine... So if you know how to make a clean Mac Os X package any help is welcome !
+   * And many more... The complete list is on the [changelog page](https://github.com/mNantern/QTodoTxt/wiki/Changelog#v120)
+
+That version was downloaded more than 300 times in 2 weeks ! Almost as many times as an album of Justin Bieber (yes I just put Justin Bieber in a post about a Python todolist app :).
+
+So if you have more ideas for a v1.3.0, feel free to drop a ticket in [GitHub](https://github.com/mNantern/QTodoTxt/issues). 
+
+And if you are a:
+   
+   * Debian package maker
+   * Mac Os X package maker
+   * Python guru
+   * Canadian popstar
+   * Human being
+
+You can help me ! Don't hesitate to contact me :)

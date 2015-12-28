@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "Objectifs 2014"
+date:   2014-01-04 12:00:00
+categories: fr
+excerpt: Comme l'année précédente je vais me livrer au jeu des prévisions pour l'année 2014.Et comme l'année dernière je vais me tromper...
+---
+![2014]({{site.url}}/assets/2014.jpg)
+
+
+Comme l'année précédente on va se livrer au jeu des prévisions pour l'année 2014.
+Et je pense aussi que comme l'année précédente je ne tiendrais pas tous ces objectifs... 
+Bon par contre ce coup-ci je ne me donne plus d'objectifs chiffrés on va faire ce qu'on peut avec le temps qu'on a !
+ 
+Au menu de cette année:
+
+   * Nouvelle version de [QTodoTxt](https://github.com/mNantern/QTodoTxt) avec pleins de nouvelles choses dedans
+   * Première version de KataHero (plus d'infos "prochainement")
+   * Des publications sur mon blog français et anglais, et oui je change d’avis comme de T-shirt (et non ce n’est pas une fois par an…)
+   * Et même des publications sur le [blog de Xebia](http://blog.xebia.fr/)
+
+Du coup je vais répartir les choses comme ça:
+
+   * Articles techniques en français sur le blog de Xebia
+   * Articles techniques en anglais sur mon blog
+   * Annonce pour mes projets sur mon blog
+
+
+Allez c'est parti pour 2014 !

@@ -1,0 +1,11 @@
+---
+layout: post
+title: Export Spotify Playlist to CSV
+date: 2012-08-14
+comments: false
+categories: en
+excerpt: Export a Spotify playlist to CSV
+---
+
+<div class='post'>
+<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="{{ site.url }}/assets/Spotify.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img alt="spotify" border="0" src="{{ site.url }}/assets/Spotify.jpg" height="225" title="" width="400" /></a></div><br /><br /><br />Today, I wanted to export my Spotify playlist to a classic CSV file. I needed it because I like to keep my data offline (we never know...).<br /><br />Step 1: Google !&nbsp; I found a couple of links like <a href="http://www.spotify.com/en/about/spotify-on-the-web/playlist-converters/" target="_blank">this one</a> or <a href="http://www.spotify-forum.com/viewtopic.php?f=4&amp;t=15" target="_blank">that one</a> but it was not what I was looking for. So...<br /><br />Step 2: do it myself ! When you copy/paste HTTP URL (select all your songs and then right clik, copy HTTP URL) you got a big line with http uri. So I just did a "GET" on it to see what I got back.<br /><br />It was an HTLM page with all the data that I wanted (title, artist and album name) so I wanted to parse that page.<br /><br />To do that I used a great script "<a href="http://simplehtmldom.sourceforge.net/" target="_blank">PHP Simple HTML DOM Parser</a>" and I was able to get all the data needed !<br /><br />You can get the source code here: <a href="https://bitbucket.org/matthieu_nantern/dlspotifydata/overview">https://bitbucket.org/matthieu_nantern/dlspotifydata/overview</a><br /><br />It's very easy to use:<br /><ol><li>Copy/paste your playlist in a text file, you have got a big ugly line and a text file called input.txt (for example...)</li><li>Use the script: php -f dlSpotify.php input.txt output.csv</li><li>Tadaaa ! output.csv is a CSV-file, with tabulation separation. Column 1 is the track title, Column 2 the artist(s) and Column 3 the album title.</li></ol>Enjoy ! </div>

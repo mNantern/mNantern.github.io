@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Puppet, RedHat et le dossier limits.d</title>
+        <meta name="viewport" content="width=device-width">
+	    <link rel="alternate" type="application/atom+xml" href="http://blog.nantern.com/en/atom.xml" title="English Atom feed">
+	    <link rel="alternate" type="application/atom+xml" href="http://blog.nantern.com/fr/atom.xml" title="French Atom feed">
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+
+	<div class="left-pannel">
+	  <ul class="icon-list">
+            <li class="icon">
+                <a href="http://blog.nantern.com/en" title="Matthieu Nantern - English Blog">
+                    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512">
+                        <path d="M 192.00,96.00 C 315.712,96.00 416.00,196.289 416.00,320.00 L 368.00,320.00 C 368.00,272.988 349.693,228.791 316.451,195.549 C 283.209,162.307 239.011,144.00 192.00,144.00 L 192.00,96.00 ZM 192.00,0.00 C 368.73,0.00 512.00,143.27 512.00,320.00 L 464.00,320.00 C 464.00,283.26 456.815,247.643 442.645,214.141 C 428.947,181.757 409.328,152.663 384.333,127.667 C 359.337,102.671 330.243,83.052 297.859,69.355 C 264.357,55.185 228.741,48.00 192.00,48.00 L 192.00,0.00 ZM 287.195,224.804 C 309.074,246.682 319.993,275.357 319.98,304.029 C 288.00,352.027 288.00,416.00 288.00,416.00 C 160.00,416.00 64.00,512.00 64.00,512.00 L 57.00,505.00 L 45.435,493.435 L 187.226,351.644 C 188.784,351.877 190.377,352.00 192.00,352.00 C 209.673,352.00 224.00,337.673 224.00,320.00 C 224.00,302.327 209.673,288.00 192.00,288.00 C 174.327,288.00 160.00,302.327 160.00,320.00 C 160.00,321.623 160.123,323.217 160.356,324.774 L 18.565,466.565 L 0.00,448.00 C 0.00,448.00 96.00,352.00 96.00,224.00 C 96.00,224.00 159.999,224.00 207.999,192.00 C 236.663,192.00 265.326,202.935 287.195,224.804 Z" id="path3123" /><text xml:space="preserve" style="font-size:72.1296463px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill-opacity:1;stroke:none;font-family:Sans" x="424.68048" y="419.45462" id="text3139" transform="scale(0.90622656,1.1034768)"><tspan x="424.68048" y="419.45462" id="tspan3141"><tspan x="424.68048" y="419.45462" id="tspan3143">EN</tspan></tspan></text>
+                    </svg>
+                </a>
+            </li>
+            <li class="icon">
+                <a href="http://blog.nantern.com/fr" title="Matthieu Nantern - French Blog">
+                    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512">
+                        <path d="M 192.00,96.00 C 315.712,96.00 416.00,196.289 416.00,320.00 L 368.00,320.00 C 368.00,272.988 349.693,228.791 316.451,195.549 C 283.209,162.307 239.011,144.00 192.00,144.00 L 192.00,96.00 ZM 192.00,0.00 C 368.73,0.00 512.00,143.27 512.00,320.00 L 464.00,320.00 C 464.00,283.26 456.815,247.643 442.645,214.141 C 428.947,181.757 409.328,152.663 384.333,127.667 C 359.337,102.671 330.243,83.052 297.859,69.355 C 264.357,55.185 228.741,48.00 192.00,48.00 L 192.00,0.00 ZM 287.195,224.804 C 309.074,246.682 319.993,275.357 319.98,304.029 C 288.00,352.027 288.00,416.00 288.00,416.00 C 160.00,416.00 64.00,512.00 64.00,512.00 L 57.00,505.00 L 45.435,493.435 L 187.226,351.644 C 188.784,351.877 190.377,352.00 192.00,352.00 C 209.673,352.00 224.00,337.673 224.00,320.00 C 224.00,302.327 209.673,288.00 192.00,288.00 C 174.327,288.00 160.00,302.327 160.00,320.00 C 160.00,321.623 160.123,323.217 160.356,324.774 L 18.565,466.565 L 0.00,448.00 C 0.00,448.00 96.00,352.00 96.00,224.00 C 96.00,224.00 159.999,224.00 207.999,192.00 C 236.663,192.00 265.326,202.935 287.195,224.804 Z" id="path3124" /><text xml:space="preserve" style="font-size:72.1296463px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill-opacity:1;stroke:none;font-family:Sans" x="424.68048" y="419.45462" id="text3140" transform="scale(0.90622656,1.1034768)"><tspan x="424.68048" y="419.45462" id="tspan3142"><tspan x="424.68048" y="419.45462" id="tspan3144">FR</tspan></tspan></text>
+                    </svg>
+                </a>
+            </li>
+            <li class="icon">
+                <a href="http://shaarli.nantern.com" title="Matthieu Nantern - My Links">
+                    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512">
+                        <g id="g3083" transform="matrix(4.3715413,0,0,4.463624,-16.575132,-35.495361)"><path d="m 89.675848,114.54845 c -5.552753,-1.98021 -13.47546,-7.5052 -19.317617,-13.47136 l -5.095743,-5.203906 -3.095826,5.485506 c -1.702704,3.01702 -4.666474,6.68349 -6.586156,8.1477 -7.05655,5.3823 -18.671526,7.02628 -25.370344,3.59093 -9.2295,-4.73317 -11.243098,-11.66563 -6.788069,-23.370149 C 24.839942,86.002115 26,82.559499 26,82.076912 26,81.594325 23.75831,80.661708 21.018466,80.00443 14.548469,78.452301 8.2428743,73.825528 6.3175215,69.21751 4.2369392,64.237976 4.9792426,56.242263 7.9033546,52.135726 11.766444,46.710517 21.953112,43 32.984121,43 c 8.735067,0 9.489072,-0.691946 10.693315,-9.813197 1.933963,-14.648348 7.747709,-21.944715 18.292919,-22.957976 6.288495,-0.6042451 9.121558,0.136188 12.996423,3.396672 4.338406,3.650528 6.995175,9.347462 9.016605,19.334386 L 85.711967,41.5 l 4.882126,0.701162 c 16.006047,2.298759 26.596447,9.111789 27.912357,17.956606 0.38114,2.561773 0.39149,6.030412 0.023,7.708088 -0.93278,4.246953 -6.42278,8.7746 -11.69858,9.647935 -6.11997,1.013072 -6.25035,1.244432 -2.87058,5.093772 10.38187,11.824298 9.891,27.433927 -0.99974,31.791537 -4.816145,1.92704 -8.193387,1.96501 -13.284712,0.14935 z M 48.05659,91.809193 c 2.256703,-2.854944 5.243467,-7.467444 6.637253,-10.25 5.819648,-11.61835 7.029505,-11.469022 20.457677,2.525012 10.775128,11.229191 12.868206,12.426024 15.214702,8.699847 C 91.275073,91.34082 89.809581,89.404341 81.145264,80.599613 73.137129,72.461701 70.916769,69.615613 71.171858,67.815561 71.491417,65.560566 71.840027,65.486922 84.5,65 91.65,64.725 98.0625,64.135942 98.75,63.690983 103.18376,60.82139 95.72784,58.072843 81.431438,57.306679 75.074812,56.966019 69.605134,56.206148 69.123257,55.596773 68.646242,54.993548 68.031192,49.515963 67.756479,43.424363 67.228799,31.723388 66.101666,28 63.087261,28 59.642286,28 58.681268,30.772816 58.036594,42.572644 57.194617,57.983813 57.4614,57.739874 40.5,58.607619 27.152179,59.290492 24,60.029544 24,62.476167 c 0,2.306708 1.787465,2.779574 11.370136,3.007919 10.19538,0.242945 13.178727,0.897887 14.014821,3.076711 0.595683,1.552325 -2.220937,8.185808 -7.357403,17.327578 C 40.362399,88.851981 39,92.564481 39,94.138375 39,96.516944 39.418087,97 41.476746,97 c 1.790599,0 3.613453,-1.438041 6.579844,-5.190807 z" id="path3099" /></g>
+                    </svg>
+                </a>
+            </li>
+<li class="icon">
+                <a href="http://github.com/mNantern" title="Matthieu Nantern - mNantern on GitHub">
+                    <svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 408.028,408.028 c-19.759,19.758-42.756,35.266-68.354,46.093c-6.503,2.75-13.107,5.164-19.80,7.246L 319.874,423.00 c0.00-20.167-6.917-35.00-20.75-44.50 c 8.667-0.833, 16.625-2.00, 23.875-3.50s 14.917-3.667, 23.00-6.50s 15.333-6.208, 21.75-10.125s 12.583-9.00, 18.50-15.25s 10.875-13.333, 14.875-21.25 s 7.167-17.417, 9.50-28.50s 3.50-23.292, 3.50-36.625c0.00-25.833-8.417-47.833-25.25-66.00c 7.667-20.00, 6.833-41.75-2.50-65.25l-6.25-0.75 c-4.333-0.50-12.125,1.333-23.375,5.50s-23.875,11.00-37.875,20.50c-19.833-5.50-40.417-8.25-61.75-8.25c-21.50,0.00-42.00,2.75-61.50,8.25 c-8.833-6.00-17.208-10.958-25.125-14.875c-7.917-3.917-14.25-6.583-19.00-8.00s-9.167-2.292-13.25-2.625s-6.708-0.417-7.875-0.25 s-2.00,0.333-2.50,0.50c-9.333,23.667-10.167,45.417-2.50,65.25c-16.833,18.167-25.25,40.167-25.25,66.00c0.00,13.333, 1.167,25.542, 3.50,36.625 s 5.50,20.583, 9.50,28.50s 8.958,15.00, 14.875,21.25s 12.083,11.333, 18.50,15.25s 13.667,7.292, 21.75,10.125s 15.75,5.00, 23.00,6.50 s 15.208,2.667, 23.875,3.50c-13.667,9.333-20.50,24.167-20.50,44.50l0.00,39.115 c-7.549-2.247-14.99-4.902-22.30-7.994 c-25.597-10.827-48.594-26.335-68.353-46.093c-19.758-19.759-35.267-42.756-46.093-68.354C 46.679,313.195, 41.00,285.043, 41.00,256.00 s 5.679-57.195, 16.879-83.675c 10.827-25.597, 26.335-48.594, 46.093-68.353s 42.756-35.267, 68.353-46.093 C 198.805,46.679, 226.957,41.00, 256.00,41.00s 57.195,5.679, 83.675,16.879c 25.598,10.827, 48.595,26.335, 68.354,46.093 c 19.758,19.758, 35.266,42.756, 46.093,68.353C 465.321,198.805, 471.00,226.957, 471.00,256.00s-5.679,57.195-16.879,83.675 C 443.294,365.272, 427.786,388.27, 408.028,408.028z" ></path>
+                    </svg>
+                </a>
+            </li>
+            <li class="icon">
+                <a href="http://fr.linkedin.com/pub/matthieu-nantern/62/836/589/" title="Matthieu Nantern on LinkedIn">
+                    <svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M 426.00,0.00L 86.00,0.00 C 38.70,0.00,0.00,38.70,0.00,86.00l0.00,340.00 c0.00,47.30, 38.70,86.00, 86.00,86.00l 340.00,0.00 c 47.30,0.00, 86.00-38.70, 86.00-86.00L 512.00,86.00 C 512.00,38.70, 473.30,0.00, 426.00,0.00z M 192.00,416.00l-64.00,0.00 L 128.00,192.00 l 64.00,0.00 L 192.00,416.00 z M 160.00,160.00c-17.673,0.00-32.00-14.327-32.00-32.00s 14.327-32.00, 32.00-32.00s 32.00,14.327, 32.00,32.00S 177.673,160.00, 160.00,160.00z M 416.00,416.00l-64.00,0.00 L 352.00,288.00 c0.00-17.673-14.327-32.00-32.00-32.00s-32.00,14.327-32.00,32.00l0.00,128.00 l-64.00,0.00 L 224.00,192.00 l 64.00,0.00 l0.00,39.736 C 301.199,213.604, 321.376,192.00, 344.00,192.00c 39.765,0.00, 72.00,35.817, 72.00,80.00 L 416.00,416.00 z" ></path>
+                    </svg>
+                </a>
+            </li>
+            <li class="icon"><a href="https://twitter.com/mNantern" title="Matthieu Nantern on Twitter"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 403.121,180.544 c 0.146,3.254, 0.221,6.528, 0.221,9.819c0.00,100.311-76.354,215.982-215.979,215.982c-42.868,0.00-82.768-12.568-116.363-34.107 c 5.938,0.704, 11.981,1.063, 18.108,1.063c 35.565,0.00, 68.295-12.138, 94.275-32.497c-33.217-0.61-61.25-22.561-70.912-52.716 c 4.637,0.884, 9.392,1.361, 14.283,1.361c 6.923,0.00, 13.629-0.928, 19.999-2.662c-34.726-6.976-60.893-37.656-60.893-74.434 c0.00-0.32,0.00-0.639, 0.008-0.955c 10.235,5.685, 21.939,9.10, 34.382,9.494c-20.37-13.611-33.77-36.846-33.77-63.184 c0.00-13.911, 3.744-26.952, 10.278-38.162c 37.439,45.927, 93.374,76.146, 156.462,79.314c-1.294-5.559-1.965-11.351-1.965-17.302 c0.00-41.92, 33.99-75.906, 75.909-75.906c 21.833,0.00, 41.562,9.218, 55.409,23.97c 17.29-3.404, 33.537-9.721, 48.206-18.42 c-5.668,17.727-17.705,32.603-33.376,41.997c 15.355-1.834, 29.984-5.916, 43.597-11.952 C 430.825,156.471, 417.955,169.84, 403.121,180.544z" ></path></svg></a></li>
+	</ul>		
+</div>
+
+
+<div class="site">
+        <h1 class="post-title">Puppet, RedHat et le dossier limits.d</h1>
+<p class="meta">27 Jan 2014</p>
+
+<div class="post">
+<p><img src="http://blog.nantern.com/assets/PL_logo.png" alt="Puppet"></p>
+
+<p>Cette semaine j&#39;ai voulu automatiser l&#39;installation d&#39;Oracle 11g via Puppet afin de simplifier un peu l&#39;opération. L&#39;une des étapes consiste à mettre en place des limites pour l&#39;utilisateur Oracle comme indiqué sur <a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shell_Limits_for_the_Oracle_User.html">cette page RedHat</a>.</p>
+
+<p>Et pour une fois que RedHat dispose d&#39;un dossier tel que &quot;limits.d&quot; autant s&#39;en servir afin de placer directement notre fichier dans ce dossier /etc/security/limits.d via Puppet. Le fichier ressemble à ça:</p>
+
+<div class="highlight"><pre><code class="bash">oracle           hard    nofile          65536
+</code></pre></div>
+
+<p>La valeur par défaut étant de 1024.</p>
+
+<p>L&#39;étape suivante consistait à lancer l&#39;installeur Oracle avec l&#39;utilisateur oracle qui devait donc prendre en compte les paramètres mis dans ce fichier. Et là c&#39;est le drame ! L&#39;installeur Oracle se plaint que les paramètres &quot;security&quot; ne sont pas appliqués...</p>
+
+<p>Afin de mieux comprendre le problème je fais un petit test via Puppet:</p>
+
+<div class="highlight"><pre><code class="puppet"><span class="nc">exec</span><span class="p">{</span><span class="s1">&#39;test ulimit user&#39;</span><span class="p">:</span> 
+  <span class="nt">command</span> <span class="p">=&gt;</span> <span class="s2">&quot;/bin/su - oracle -c &#39;ulimit -Hn&#39; &gt; /tmp/logMN&quot;</span><span class="p">,</span> 
+<span class="p">}</span>
+
+<span class="nc">exec</span><span class="p">{</span><span class="s1">&#39;test ulimit user pup&#39;</span><span class="p">:</span> 
+  <span class="nt">command</span> <span class="p">=&gt;</span> <span class="s2">&quot;/bin/bash -c &#39;ulimit -Hn&#39; &gt; /tmp/logMN2&quot;</span><span class="p">,</span> 
+  <span class="nt">user</span> <span class="p">=&gt;</span> <span class="s2">&quot;oracle&quot;</span><span class="p">,</span> 
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Le premier exec teste le nombre maximum de descripteurs de fichiers (limite &quot;hard&quot;) via un changement d&#39;utilisateur classique via su. Le second test execute la même commande, également avec l&#39;utilisateur &quot;oracle&quot;, mais via Puppet et le paramètre &quot;user&quot;.</p>
+
+<p>Et les résultats:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="o">[</span>root@lxpt106 ~<span class="o">]</span><span class="c"># more /tmp/logMN* </span>
+:::::::::::::: /tmp/logMN :::::::::::::: 
+65536 
+:::::::::::::: /tmp/logMN2 :::::::::::::: 
+1024
+</code></pre></div>
+
+<p>Mes craintes se concrétisent, un exec Puppet avec le paramètre &quot;user&quot; ne se comporte pas comme un su classique.Visiblement Puppet ne prend pas en compte PAM lors du changement d&#39;utilisateur. Peut-être faut-il configurer quelque chose de particulier dans PAM.
+En attendant je pars sur la solution 1 avec un su à l&#39;ancienne.</p>
+
+<p>J&#39;ai également trouvé un bug ouvert sur le <a href="http://projects.puppetlabs.com/issues/4707">bug tracker Puppet</a> mais visiblement il n&#39;est pas envisagé de corriger ce fonctionnement.</p>
+
+<p>En attendant la solution 1 fonctionne bien !</p>
+
+</div>
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Matthieu Nantern<br />
+                <a href="mailto:matthieu.nantern@gmail.com">matthieu.nantern@gmail.com</a><br />
+		<a href="https://twitter.com/mNantern">@mNantern</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>

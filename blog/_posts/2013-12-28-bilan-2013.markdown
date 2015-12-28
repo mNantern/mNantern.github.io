@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "Bilan 2013"
+date:   2013-12-28 13:00:00
+categories: fr
+excerpt: Une année sans résolution non tenue n'est pas une bonne anée ! Mon bilan...
+---
+![Fin 2013]({{site.url}}/assets/2013_end.jpg)
+
+Et voilà une année de plus en moins !
+
+C’ est fou mais ça passe super vite. C’est l’occasion de faire un bilan « informatiquement » parlant !
+
+Début 2013 je souhaitais tout un tas de chose mais comme je l’écrivais de manière prophétique (pas trop dure cette prophétie me connaissant…): "Comme tous les ans on prend des résolutions que, comme tous les ans, on ne tiendra pas ! ».
+
+Enfin bref l’objectif de l’année était de publier un article par semaine. On va dire presque… 15 c’est pas mal :P
+
+Par contre et à mon plus grand étonnement j’ai fait d’autres choses:
+
+   * J’ai repris un projet libre de gestion de todo se basant sur la méthode GTD: [QTodoTxt](https://github.com/mNantern/QTodoTxt). J’ai même sorti 2 versions sur l’année. Et la troisième arrive bientôt…
+   * J’ai changé de boulot et je m’éclate dans cette [nouvelle boite](http://www.xebia.fr/)
+   * J’ai même fait une [conférence internationale sur Cassandra](http://fr.slideshare.net/mNantern/cassandra-summit-europe2013), la classe !
+   * J’ai commencé à développer une application web permettant à chacun de créer et partager des petits exercices informatiques (kata). Ca arrive début 2014 j’espère !
+
+
+En résumé une année géniale où j’ai appris des tonnes de choses ! Vivement 2014 !
