@@ -1,5 +1,1 @@
-markdown: redcarpet
-pygments: true
-source: /var/www/Homepage/blog/
-destination: /var/www/Homepage/blog/_site
 url: http://blog.nantern.com
