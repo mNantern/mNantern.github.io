@@ -5,7 +5,7 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
  
   <title>Matthieu Nantern - Blog</title>
-  <link href="http://blog.nantern.com/"/>
+  <link href="https://blog.nantern.com/"/>
   <link type="application/atom+xml" rel="self" href="{{site.url}}/en/atom.xml"/>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <id>http://blog.nantern.com/</id>
@@ -23,7 +23,7 @@ layout: nil
     <updated>{{ post.date | date_to_xmlschema }}</updated>
     <author>
       <name>Matthieu Nantern</name>
-      <uri>http://nantern.com/</uri>
+      <uri>https://nantern.com/</uri>
     </author>
     <content type="html">{{ post.content | xml_escape }}</content>
   </entry>
