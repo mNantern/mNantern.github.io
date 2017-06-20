@@ -14,9 +14,10 @@ html, body { height: 100%; }
 
 body {
   background-color: #FFF;
-  font: 13.34px Helvetica, Arial, sans-serif;
+  font: 13.34px;
   font-size: small;
   text-align: center;
+  font-family: -apple-system,".SFNSText-Regular","San Francisco","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,7 +64,7 @@ ul.posts span {
 /*****************************************************************************/
 
 .site {
-  font-size: 115%;
+  font-size: 145%;
   text-align: justify;
   width: 60%;
   margin-left: 10em;
@@ -188,7 +189,7 @@ a:hover {fill: #268ED4;}
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .left-pannel {
     display: none;
   }
@@ -257,4 +258,12 @@ svg {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+blockquote {
+    margin: 2em 1em 2em 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-style: italic;
+    border-left: 0.25em solid #7a8288;
 }
