@@ -215,6 +215,7 @@ a:hover {fill: #268ED4;}
 
 .post ul, .post ol {
   margin-left: 1.35em;
+  margin-bottom: 1em;
 }
 
 .post code {
