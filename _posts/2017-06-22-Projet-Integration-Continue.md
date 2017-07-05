@@ -47,3 +47,5 @@ Trucs et astuces :
 
 Avec ça nous disposons d’une base solide pour gérer le code source de notre projet et toute la partie intégration continue.
 Nous allons ensuite passer à l’étape suivante à savoir construire notre premier environnement pour déployer notre code source et c’est ce que nous verrons dans la troisième partie.
+
+Stay tuned and See ya !

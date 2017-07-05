@@ -55,3 +55,5 @@ Ces outils représentent **UN** choix possible, il en existe bien sûr de nombre
 Avec ces outils vous êtes équipés pour gérer tous les logs et les métriques de votre projet pendant de nombreuses années, faites en bon usage !
 
 Dans le prochain épisode nous parlerons d'intégration continue deuxième grande étape dans notre voyage !
+
+Stay tuned and See ya !
