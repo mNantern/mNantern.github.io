@@ -272,3 +272,7 @@ blockquote {
     font-style: italic;
     border-left: 0.25em solid #7a8288;
 }
+
+.emoji {
+    min-width: auto;
+}
